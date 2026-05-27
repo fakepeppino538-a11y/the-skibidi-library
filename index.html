@@ -3,46 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Skibidi Library</title>
+  <title>My Book Library</title>
   <style>
-    :root {
-      --bg: #f6f7fb;
-      --card: #ffffff;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --border: #e5e7eb;
-      --accent: #2563eb;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      background: #f6f7fb;
+      color: #1f2937;
     }
 
     header {
       padding: 24px 16px;
       text-align: center;
       background: white;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid #e5e7eb;
       position: sticky;
       top: 0;
-      z-index: 10;
-    }
-
-    header h1 {
-      margin: 0 0 8px;
-      font-size: 28px;
-    }
-
-    header p {
-      margin: 0;
-      color: var(--muted);
     }
 
     .container {
@@ -58,18 +34,16 @@
     }
 
     .book {
-      background: var(--card);
-      border: 1px solid var(--border);
+      background: white;
+      border: 1px solid #e5e7eb;
       border-radius: 14px;
       overflow: hidden;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
       cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      transition: 0.15s ease;
     }
 
     .book:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     }
 
     .cover {
@@ -87,39 +61,34 @@
     .book-info h3 {
       margin: 0 0 6px;
       font-size: 16px;
-      line-height: 1.3;
     }
 
     .book-info p {
       margin: 0;
       font-size: 13px;
-      color: var(--muted);
+      color: #6b7280;
     }
 
     .viewer {
       margin-top: 28px;
       background: white;
-      border: 1px solid var(--border);
+      border: 1px solid #e5e7eb;
       border-radius: 16px;
       overflow: hidden;
       min-height: 500px;
+      display: none;
     }
 
     .viewer-header {
       padding: 14px 16px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid #e5e7eb;
       display: flex;
       justify-content: space-between;
-      gap: 12px;
       align-items: center;
     }
 
-    .viewer-header strong {
-      font-size: 16px;
-    }
-
     .viewer-header a {
-      color: var(--accent);
+      color: #2563eb;
       text-decoration: none;
       font-size: 14px;
     }
@@ -130,37 +99,18 @@
       border: 0;
       display: block;
     }
-
-    .hint {
-      padding: 18px 16px;
-      color: var(--muted);
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 24px;
-      }
-
-      iframe {
-        height: 70vh;
-      }
-    }
   </style>
 </head>
 <body>
   <header>
-    <h1>The Skibidi Library</h1>
-    <p>Click a book cover or title to open the inside suppa epstein</p>
+    <h1>My Book Library</h1>
+    <p>Click a book cover or title to open the PDF</p>
   </header>
 
   <div class="container">
     <div class="grid" id="bookGrid"></div>
 
-    <div class="viewer hidden" id="viewerBox">
+    <div class="viewer" id="viewerBox">
       <div class="viewer-header">
         <strong id="viewerTitle">Book Viewer</strong>
         <a id="openPdf" href="#" target="_blank" rel="noopener">Open in new tab</a>
@@ -169,25 +119,8 @@
     </div>
   </div>
 
+  <script src="books.js"></script>
   <script>
-    const books = [
-      {
-        title: "The Anarchist Cookbook",
-        cover: "covers/shopping.jpg",
-        pdf: "books/The_Anarchist_Cookbook.pdf"
-      },
-      {
-        title: "The Synagogue of Satan",
-        cover: "covers/download2.jpg",
-        pdf: "books/The_Synagogue_of_Satan.pdf"
-      },
-      {
-        title: "TM 21-210 Improvised Munitions Handbook",
-        cover: "covers/download.jpg",
-        pdf: "books/TM_21210.pdf"
-      }
-    ];
-
     const grid = document.getElementById("bookGrid");
     const viewerBox = document.getElementById("viewerBox");
     const viewerTitle = document.getElementById("viewerTitle");
@@ -198,7 +131,7 @@
       viewerTitle.textContent = book.title;
       pdfFrame.src = book.pdf;
       openPdf.href = book.pdf;
-      viewerBox.classList.remove("hidden");
+      viewerBox.style.display = "block";
       viewerBox.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
@@ -212,7 +145,6 @@
           <p>Click to read</p>
         </div>
       `;
-
       card.addEventListener("click", () => openBook(book));
       grid.appendChild(card);
     });
