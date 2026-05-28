@@ -1,6 +1,6 @@
 const books = [
   {
-    title: "TM 21-210 (Improvised Munitions Handbook)",
+    title: "TM 31-210 (Improvised Munitions Handbook)",
     pdf: "books/TM_21210.pdf",
     cover: "covers/download.jpg"
   },
